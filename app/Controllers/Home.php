@@ -49,6 +49,16 @@ class Home extends BaseController
         return $this->common($path);
     }
 
+    public function read($num):string
+    {
+        $path = 'pages/read';
+        $row = $this->boardModel->get($num);
+        $readParam = [
+            'bd_info' => $row
+        ];
+        return $this->common($path, $readParam);
+    }
+
     private function common($path, $param=[])
     {
         $this->cookieCheck();

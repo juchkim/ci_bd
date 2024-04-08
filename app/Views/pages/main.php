@@ -13,7 +13,7 @@
       <?php $i=0; foreach($bd_list as $key => $row): ?>
       <tr>
         <th><?=$i+1?></th>
-        <td><?=$row['title']?></td>
+        <td><a href="<?=BASE?>read/<?=$row['idx']?>"><?=$row['title']?></a></td>
         <td><?=mb_substr($row['content'], 0, 5, 'utf-8')?>...</td>
         <td><?=$row['category']?></td>
       </tr>

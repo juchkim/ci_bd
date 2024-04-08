@@ -16,7 +16,7 @@ class Board extends Model {
     }
 
     public function get($id) {            
-        return $this->db->table('bd_tb')->where('id', $id)->get()->getRowArray();
+        return $this->db->table('bd_tb')->where('idx', $id)->get()->getRowArray();
     }
 }
 ?>
