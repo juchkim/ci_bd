@@ -12,8 +12,12 @@
       <div class="flex-none hidden lg:block">
         <ul class="menu menu-horizontal">
           <!-- Navbar menu content here -->
-          <li><a href="<?=BASE?>login">로그인</a></li>
-          <li><a href="<?=BASE?>form">글 작성</a></li>
+          <?php if($is_login){ ?>
+            <li><a href="<?=BASE?>logout">로그아웃</a></li>
+            <li><a href="<?=BASE?>form">글 작성</a></li>
+          <?php }else { ?>
+            <li><a href="<?=BASE?>login">로그인</a></li>
+          <?php  }; ?>          
           <li><a href="<?=BASE?>">글 리스트</a></li>
         </ul>
       </div>

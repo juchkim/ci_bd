@@ -7,40 +7,30 @@
         <th>Name</th>
         <th>Job</th>
         <th>Favorite Color</th>
-        <th class="w-64"></th>
       </tr>
     </thead>
     <tbody>
-      <?php for($i=0;$i<5;$i++){?>
+      <?php $i=0; foreach($bd_list as $key => $row): ?>
       <tr>
         <th><?=$i+1?></th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-        <td>
-          <div class="card-actions justify-around">
-            <button class="btn btn-accent btn-sm">Edit</button>
-            <button class="btn btn-neutral btn-sm">Reply</button>
-            <button class="btn btn-error btn-sm">Delete</button>
-          </div>
-        </td>
+        <td><?=$row['title']?></td>
+        <td><?=mb_substr($row['content'], 0, 5, 'utf-8')?>...</td>
+        <td><?=$row['category']?></td>
       </tr>
-      <?php } ?>
+      <?php $i++; endforeach ?>
     </tbody>
   </table>
   <ul class="md:hidden flex flex-col gap-3 items-center pt-3">
-    <?php for($i=0;$i<5;$i++){?>
+    <?php foreach($bd_list as $key => $row): ?>
     <li class="card w-96 bg-base-100 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title">Card title!</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad minima consequatur nam ea atque quaerat labore laborum maiores </p>
+        <h2 class="card-title"><?=$row['title']?></h2>
+        <p><?=mb_substr($row['content'], 0, 5, 'utf-8')?>...</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-accent">Edit</button>
-          <button class="btn btn-neutral">Reply</button>
-          <button class="btn btn-error">Delete</button>
+          <button class="btn btn-accent btn-sm">Read</button>
         </div>
       </div>
     </li>
-    <?php }?>
+    <?php endforeach ?>
   </ul>
 </div>

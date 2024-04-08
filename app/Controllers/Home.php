@@ -4,29 +4,61 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    public function index(): string
+    protected $boardModel;
+    protected $isLogin;
+    
+    public function __construct()
     {
-        return 
-        view('common/header').
-        view('common/nav').
-        view('pages/main').
-        view('common/footer');
+        $this->boardModel = model('App\Models\Board');
     }
 
-    public function login(): string
+    private function cookieCheck()
     {
-        return 
-        view('common/header').
-        view('pages/login').
-        view('common/footer');
+        if(isset($_COOKIE[ "accessToken" ])){
+            $cookie = json_decode($_COOKIE[ "accessToken" ], true);
+            $this->isLogin = true;
+        }else{
+            $this->isLogin = false;
+        }
     }
 
-    public function form(): string
+    public function index()
     {
-        return 
+        $result = $this->boardModel->gets();
+        $mainParam = [
+            'bd_list' => $result
+        ];
+        $path = 'pages/main';
+        return $this->common($path, $mainParam);
+    }
+
+    public function login()
+    {
+        $this->cookieCheck();
+        if($this->isLogin){
+            return redirect()->route('/');
+        }
+        return
         view('common/header').
+        view('pages/login');
+    }
+
+    public function form()
+    {
+        $path = 'pages/form';
+        return $this->common($path);
+    }
+
+    private function common($path, $param=[])
+    {
+        $this->cookieCheck();
+        $headerParam = [
+            'is_login' => $this->isLogin
+        ];
+        return 
+        view('common/header', $headerParam).
         view('common/nav').
-        view('pages/form').
+        view($path, $param).
         view('common/footer');
     }
 }
