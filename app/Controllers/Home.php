@@ -8,6 +8,25 @@ class Home extends BaseController
     {
         return 
         view('common/header').
-        view('welcome_message');
+        view('common/nav').
+        view('pages/main').
+        view('common/footer');
+    }
+
+    public function login(): string
+    {
+        return 
+        view('common/header').
+        view('pages/login').
+        view('common/footer');
+    }
+
+    public function form(): string
+    {
+        return 
+        view('common/header').
+        view('common/nav').
+        view('pages/form').
+        view('common/footer');
     }
 }
