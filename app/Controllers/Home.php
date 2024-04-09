@@ -6,6 +6,7 @@ class Home extends BaseController
 {
     protected $boardModel;
     protected $isLogin;
+    protected $userInfo;
     
     public function __construct()
     {
@@ -17,8 +18,10 @@ class Home extends BaseController
         if(isset($_COOKIE[ "accessToken" ])){
             $cookie = json_decode($_COOKIE[ "accessToken" ], true);
             $this->isLogin = true;
+            $this->userInfo = $cookie;
         }else{
             $this->isLogin = false;
+            $this->userInfo = [];
         }
     }
 
@@ -56,10 +59,13 @@ class Home extends BaseController
 
     public function read($num):string
     {
+        $this->cookieCheck();
         $path = 'pages/read';
         $row = $this->boardModel->get($num);
         $readParam = [
-            'bd_info' => $row
+            'bd_info' => $row,
+            'isLogin' => $this->isLogin,
+            'user_info' => $this->userInfo,
         ];
         return $this->common($path, $readParam);
     }

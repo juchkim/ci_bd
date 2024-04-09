@@ -39,4 +39,14 @@
       <?php endforeach ?>
     </ul>
   <?php } ?>
+  <div class="flex justify-center mt-3">
+    <div class="join">
+      <button class="join-item btn btn-sm">«</button>
+      <button class="join-item btn btn-sm">1</button>
+      <button class="join-item btn btn-active btn-sm">2</button>
+      <button class="join-item btn btn-sm">3</button>
+      <button class="join-item btn btn-sm">4</button>
+      <button class="join-item btn btn-sm">»</button>
+    </div>
+  </div>
 </div>
