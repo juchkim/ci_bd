@@ -18,5 +18,9 @@ class Board extends Model {
     public function get($id) {            
         return $this->db->table('bd_tb')->where('idx', $id)->get()->getRowArray();
     }
+
+    public function insertData($tb, $data){
+        return $this->db->table($tb)->insert($data);
+    }
 }
 ?>

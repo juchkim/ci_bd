@@ -12,3 +12,4 @@ $routes->get('/logout', 'Process::logout');
 $routes->get('/read/(:num)', 'Home::read/$1');
 
 $routes->post('/login_process', 'Process::login');
+$routes->post('/register', 'Process::form');

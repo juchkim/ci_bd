@@ -45,6 +45,11 @@ class Home extends BaseController
 
     public function form()
     {
+        $this->cookieCheck();
+        if(!$this->isLogin){
+            echo "<script>alert('회원전용 권한입니다');history.back();</script>";
+            return;
+        }
         $path = 'pages/form';
         return $this->common($path);
     }
