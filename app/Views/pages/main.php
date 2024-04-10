@@ -15,14 +15,14 @@
         </tr>
       </thead>
       <tbody>
-        <?php $i=0; foreach($bd_list as $key => $row): ?>
+        <?php foreach($bd_list as $key => $row): ?>
         <tr>
-          <th><?=$i+1?></th>
+          <th><?=$startNum++?></th>
           <td><a href="<?=BASE?>read/<?=$row['idx']?>"><?=$row['title']?></a></td>
           <td><?=mb_substr($row['content'], 0, 10, 'utf-8')?>...</td>
           <td><?=$row['regdate']?></td>
         </tr>
-        <?php $i++; endforeach ?>
+        <?php endforeach ?>
       </tbody>
     </table>
     <ul class="md:hidden flex flex-col gap-3 items-center pt-3">
@@ -41,12 +41,21 @@
   <?php } ?>
   <div class="flex justify-center mt-3">
     <div class="join">
-      <button class="join-item btn btn-sm">«</button>
-      <button class="join-item btn btn-sm">1</button>
-      <button class="join-item btn btn-active btn-sm">2</button>
-      <button class="join-item btn btn-sm">3</button>
-      <button class="join-item btn btn-sm">4</button>
-      <button class="join-item btn btn-sm">»</button>
+      <?php if($page>1){?>
+        <button class="join-item btn btn-sm" onclick="pageNove(<?=$page-1?>)">«</button>
+        <button class="join-item btn btn-sm" onclick="pageNove(<?=$prevPage?>)"><?=$prevPage?></button>
+      <?php } ?>
+      <button class="join-item btn btn-active btn-sm"><?=$page?></button>
+      <?php if($page<$totalPage){?>
+        <button class="join-item btn btn-sm"  onclick="pageNove(<?=$nextPage?>)"><?=$nextPage?></button>
+        <button class="join-item btn btn-sm" onclick="pageNove(<?=$page+1?>)">»</button>
+      <?php } ?>
     </div>
   </div>
 </div>
+<script>
+  const pageNove = (page)=>{
+    const {origin, pathname} = location;
+    location.href = `${origin}${pathname}?page=${page}`;
+  }
+</script>

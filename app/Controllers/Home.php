@@ -27,9 +27,36 @@ class Home extends BaseController
 
     public function index()
     {
-        $result = $this->boardModel->gets();
+        
+        $page = $this->request->getGet('page');
+        if($page==null){
+            $page=1;
+        }
+        $perPage = 10;
+        $startPage = ($page-1)*$perPage;
+        $result = $this->boardModel->gets($startPage, $perPage);
+        
+        $count = $this->boardModel->getBdAllCount();
+        $totalPage = ceil($count / $perPage);
+        $startNum = (($page-1) * $perPage) + 1;
+
+        $prevPage = 0;
+        $nextPage = 0;
+
+        if($page>1){
+            $prevPage = $page-1;
+        }
+        if($page<$totalPage){
+            $nextPage = $page+1;
+        }
+
         $mainParam = [
-            'bd_list' => $result
+            'bd_list' => $result,
+            'totalPage' => $totalPage,
+            'startNum' => $startNum,
+            'prevPage' => $prevPage,
+            'nextPage' => $nextPage,
+            'page' => $page,
         ];
         $path = 'pages/main';
         return $this->common($path, $mainParam);
@@ -71,6 +98,7 @@ class Home extends BaseController
         $path = 'pages/form';
         return $this->common($path, $readParam);
     }
+    
 
     public function read($num):string
     {

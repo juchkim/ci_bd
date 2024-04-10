@@ -11,12 +11,19 @@ class Board extends Model {
         $this->db = db_connect();
     }
 
-    public function gets() {
-        return $this->db->query("SELECT * FROM bd_tb where is_deleted='n'")->getResultArray();
+    public function gets($start_page, $perPage) {
+        $builder = $this->db->table("bd_tb");
+        $builder->where('is_deleted', 'n');
+        $builder->limit($perPage , $start_page);
+        return $builder->get()->getResultArray();
+    }
+
+    public function getBdAllCount(){
+        return $this->db->table('bd_tb')->where('is_deleted', 'n')->countAll();
     }
 
     public function get($id) {            
-        return $this->db->table('bd_tb')->where('is_deleted', 'n')->where('idx', $id)->get()->getRowArray();
+        return $this->db->table('bd_tb')->where('idx', $id)->where('is_deleted', 'n')->get()->getRowArray();
     }
 
     public function reply_get($id){
