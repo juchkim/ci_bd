@@ -3,9 +3,10 @@
     <div class="card-body">
       <h2 class="card-title"><?=$bd_info['title']?></h2>
       <p><?=$bd_info['content']?></p>
-      <?php if($isLogin && "로그인 하고 내것이면 나오게 하기" && false){?>
+      <?php if($isLogin && "로그인 하고 내것이면 나오게 하기" && $owner){?>
         <div class="card-actions justify-end">
-          <button class="btn btn-error">삭제하기</button>
+          <button class="btn btn-error" type="button" onclick="handleDelete(<?=$bd_info['idx']?>)">삭제하기</button>
+          <button class="btn btn-default"  type="button" onclick="handleEdit(<?=$bd_info['idx']?>)">수정하기</button>
         </div>
       <?php } ?>
       <?php if($isLogin && "로그인 하고 내것이 아니면 나오게 하기" && false){?>

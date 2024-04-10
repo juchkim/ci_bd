@@ -60,4 +60,18 @@ class Process extends BaseController
         
       }
     }
+
+    public function delete($id):void
+    {
+      try {
+        $tb_name = "bd_tb";
+        $data = [
+          "is_deleted" => 'y',
+        ];
+        $this->boardModel->updateData($tb_name, $data, $id);
+        echo "<script>location.href='".BASE."'</script>";
+      } catch (ErrorException $e) {
+        
+      }
+    }
 }

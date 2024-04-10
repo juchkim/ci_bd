@@ -62,10 +62,19 @@ class Home extends BaseController
         $this->cookieCheck();
         $path = 'pages/read';
         $row = $this->boardModel->get($num);
+        if(!isset($row['reg_id'])){
+            echo "<script>alert('삭제된 게시물 입니다.');location.href='".BASE."';</script>";
+            return "";
+        }
+        $userInfo = $this->userInfo;
+        if(!isset($userInfo['data'])){
+            $userInfo['data']['id'] = "";
+        }
+
         $readParam = [
             'bd_info' => $row,
             'isLogin' => $this->isLogin,
-            'user_info' => $this->userInfo,
+            "owner" => $userInfo['data']['id'] == $row['reg_id'],
         ];
         return $this->common($path, $readParam);
     }
