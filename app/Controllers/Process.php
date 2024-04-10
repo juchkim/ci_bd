@@ -39,6 +39,7 @@ class Process extends BaseController
 
     public function form(): void
     {
+      $idx = $this->request->getPost('idx');
       $title = strip_tags($this->request->getPost('title'));
       $content = strip_tags($this->request->getPost('content'));
       if(!isset($_COOKIE[ "accessToken" ])){
@@ -54,8 +55,13 @@ class Process extends BaseController
       ];
       $tb_name = "bd_tb";
       try {
-        $this->boardModel->insertData($tb_name, $data);
-        echo "<script>location.href='".BASE."'</script>";
+        if($idx!=""){
+          $this->boardModel->updateData($tb_name, $data, $idx);
+          echo "<script>location.href='".BASE."read/$idx'</script>";
+        }else{
+          $this->boardModel->insertData($tb_name, $data);
+          echo "<script>location.href='".BASE."'</script>";
+        }
       } catch (ErrorException $e) {
         
       }

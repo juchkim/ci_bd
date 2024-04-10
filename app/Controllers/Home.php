@@ -57,6 +57,21 @@ class Home extends BaseController
         return $this->common($path);
     }
 
+    public function edit_form($num)
+    {
+        $this->cookieCheck();
+        if(!$this->isLogin){
+            echo "<script>alert('회원전용 권한입니다');history.back();</script>";
+            return;
+        }
+        $row = $this->boardModel->get($num);
+        $readParam = [
+            'bd_info' => $row
+        ];
+        $path = 'pages/form';
+        return $this->common($path, $readParam);
+    }
+
     public function read($num):string
     {
         $this->cookieCheck();

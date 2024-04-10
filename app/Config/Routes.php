@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
 $routes->get('/form', 'Home::form');
+$routes->get('/form/(:num)', 'Home::edit_form/$1');
 $routes->get('/logout', 'Process::logout');
 $routes->get('/read/(:num)', 'Home::read/$1');
 
