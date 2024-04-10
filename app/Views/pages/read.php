@@ -1,8 +1,8 @@
 <div class="flex items-center justify-center mt-6">
   <div class="card w-full max-w-md bg-base-100 shadow-xl">
     <div class="card-body">
-      <h2 class="card-title"><?=$bd_info['title']?></h2>
-      <p><?=$bd_info['content']?></p>
+      <h2 class="card-title"><?=esc($bd_info['title'])?></h2>
+      <p><?=esc($bd_info['content'])?></p>
       <?php if($isLogin && $owner){?>
         <div class="card-actions justify-end">
           <button class="btn btn-error" type="button" onclick="handleDelete(<?=$bd_info['idx']?>)">삭제하기</button>
@@ -40,7 +40,7 @@
               <div class="chat-header">
                 <?=$row['reg_id']?>
               </div>
-              <div class="chat-bubble"><?=$row['reply_context']?></div>
+              <div class="chat-bubble"><?=esc($row['reply_context'])?></div>
             </div>
           <?php } ?>
         </div>

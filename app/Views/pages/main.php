@@ -18,8 +18,8 @@
         <?php foreach($bd_list as $key => $row): ?>
         <tr>
           <th><?=$startNum++?></th>
-          <td><a href="<?=BASE?>read/<?=$row['idx']?>"><?=$row['title']?></a></td>
-          <td><?=mb_substr($row['content'], 0, 10, 'utf-8')?>...</td>
+          <td><a href="<?=BASE?>read/<?=$row['idx']?>"><?=esc($row['title'])?></a></td>
+          <td><?=mb_substr(esc($row['content']), 0, 10, 'utf-8')?>...</td>
           <td><?=$row['regdate']?></td>
         </tr>
         <?php endforeach ?>
@@ -30,7 +30,7 @@
       <li class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
           <h2 class="card-title"><?=$row['title']?></h2>
-          <p><?=mb_substr($row['content'], 0, 5, 'utf-8')?>...</p>
+          <p><?=mb_substr(esc($row['content']), 0, 5, 'utf-8')?>...</p>
           <div class="card-actions justify-end">
             <button type="button" onclick="location.href=`<?=BASE?>read/<?=$row['idx']?>`" class="btn btn-accent btn-sm">Read</button>
           </div>
