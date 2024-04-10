@@ -19,6 +19,11 @@ class Board extends Model {
         return $this->db->table('bd_tb')->where('is_deleted', 'n')->where('idx', $id)->get()->getRowArray();
     }
 
+    public function reply_get($id){
+        $sql = "SELECT * FROM reply_tb where bd_idx=? and is_deleted='n'";
+        return $this->db->query($sql, [$id])->getResultArray();
+    }
+
     public function insertData($tb, $data){
         return $this->db->table($tb)->insert($data);
     }

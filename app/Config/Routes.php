@@ -15,3 +15,4 @@ $routes->get('/read/(:num)', 'Home::read/$1');
 $routes->get('/delete/(:num)', 'Process::delete/$1');
 $routes->post('/login_process', 'Process::login');
 $routes->post('/register', 'Process::form');
+$routes->post('/reply', 'Process::reply');

@@ -86,10 +86,13 @@ class Home extends BaseController
             $userInfo['data']['id'] = "";
         }
 
+        $res = $this->boardModel->reply_get($num);
+
         $readParam = [
             'bd_info' => $row,
             'isLogin' => $this->isLogin,
             "owner" => $userInfo['data']['id'] == $row['reg_id'],
+            'reply' => $res,
         ];
         return $this->common($path, $readParam);
     }
